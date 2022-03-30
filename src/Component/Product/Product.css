@@ -12,3 +12,11 @@
     color: blue;
     font-weight: 400;
 }
+
+.main-button{
+    background-color: goldenrod;
+    width: 150px;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
