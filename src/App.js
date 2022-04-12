@@ -12,6 +12,7 @@ import {
 import Review from "./Component/Review/Review";
 import Inventor from "./Component/Inventor/Inventor";
 import Nomatch from "./Component/Nomatch/Nomatch";
+import ProductDetails from "./Component/ProductDetails/ProductDetails";
 
 function App() {
   return <div>
@@ -33,6 +34,11 @@ function App() {
         <Route path="/inventor">
           <Inventor></Inventor>
         </Route>
+        <Route path="/product/:productKey">
+        <ProductDetails></ProductDetails>
+        </Route>
+
+        
 
         <Route path="*">
         <Nomatch></Nomatch>
