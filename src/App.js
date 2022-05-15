@@ -13,6 +13,8 @@ import Review from "./Component/Review/Review";
 import Inventor from "./Component/Inventor/Inventor";
 import Nomatch from "./Component/Nomatch/Nomatch";
 import ProductDetails from "./Component/ProductDetails/ProductDetails";
+import Login from "./Component/Login/Login";
+import Shipment from "./Component/Shipment/Shipment";
 
 function App() {
   return <div>
@@ -38,6 +40,12 @@ function App() {
         <ProductDetails></ProductDetails>
         </Route>
 
+        <Route path="/login">
+        <Login></Login>
+        </Route>
+        <Route path="/shipment">
+          <Shipment></Shipment>
+        </Route>
         
 
         <Route path="*">
