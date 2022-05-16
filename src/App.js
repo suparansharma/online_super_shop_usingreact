@@ -15,6 +15,7 @@ import Nomatch from "./Component/Nomatch/Nomatch";
 import ProductDetails from "./Component/ProductDetails/ProductDetails";
 import Login from "./Component/Login/Login";
 import Shipment from "./Component/Shipment/Shipment";
+import PrivateRoute from "./Component/PrivateRoute/PrivateRoute";
 
 export const UserContext = createContext();
 
@@ -23,8 +24,9 @@ function App() {
   return(
      <UserContext.Provider value={[loggedInUser,setLoggedInUser]}>
     <h3>{loggedInUser.email}</h3>
-    <Header></Header>
+    
     <Router>
+    <Header></Header>
       <Switch>
         <Route exact path="/">
         <Shop></Shop>
@@ -47,9 +49,9 @@ function App() {
         <Route path="/login">
         <Login></Login>
         </Route>
-        <Route path="/shipment">
+        <PrivateRoute path="/shipment">
           <Shipment></Shipment>
-        </Route>
+        </PrivateRoute>
         
 
         <Route path="*">

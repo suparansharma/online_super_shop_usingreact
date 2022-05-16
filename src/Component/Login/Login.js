@@ -5,6 +5,8 @@ import { initializeApp } from "firebase/app";
 import { getAuth,signInWithPopup,GoogleAuthProvider,signOut,signInWithEmailAndPassword,createUserWithEmailAndPassword, updateProfile, FacebookAuthProvider  } from "firebase/auth";
 import firebaseConfig from './firebase.config';
 import { UserContext } from '../../App';
+import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 
 
@@ -19,6 +21,9 @@ function Login() {
 
   })
   const [loggedInUser,setLoggedInUser] = useContext(UserContext);
+  let history = useHistory();
+  let location = useLocation();
+  let { from } = location.state || { from: { pathname: "/" } };
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const googleProvider = new GoogleAuthProvider();
@@ -150,6 +155,7 @@ function Login() {
         newUserInfo.success = true;
         setUser(newUserInfo);
         setLoggedInUser(newUserInfo);
+        history.replace(from);
         console.log('sing is user info',res.user);
       })
       .catch(error => {
