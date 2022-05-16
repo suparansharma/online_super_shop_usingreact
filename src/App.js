@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Header from "./Component/Header/Header";
 import Shop from "./Component/Shop/Shop";
-import React from "react";
+import React, { createContext, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,9 +16,13 @@ import ProductDetails from "./Component/ProductDetails/ProductDetails";
 import Login from "./Component/Login/Login";
 import Shipment from "./Component/Shipment/Shipment";
 
+export const UserContext = createContext();
+
 function App() {
-  return <div>
-    
+  const [loggedInUser,setLoggedInUser] = useState({});
+  return(
+     <UserContext.Provider value={[loggedInUser,setLoggedInUser]}>
+    <h3>{loggedInUser.email}</h3>
     <Header></Header>
     <Router>
       <Switch>
@@ -53,7 +57,7 @@ function App() {
         </Route>
       </Switch>
     </Router>
-  </div>;
+  </UserContext.Provider>)
 }
 
 export default App;

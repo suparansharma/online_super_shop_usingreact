@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import * as firebase from 'firebase/app';
 import "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getAuth,signInWithPopup,GoogleAuthProvider,signOut,signInWithEmailAndPassword,createUserWithEmailAndPassword, updateProfile, FacebookAuthProvider  } from "firebase/auth";
 import firebaseConfig from './firebase.config';
+import { UserContext } from '../../App';
 
 
 
@@ -17,7 +18,7 @@ function Login() {
     photo:''
 
   })
-
+  const [loggedInUser,setLoggedInUser] = useContext(UserContext);
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const googleProvider = new GoogleAuthProvider();
@@ -148,6 +149,7 @@ function Login() {
         newUserInfo.error = '';
         newUserInfo.success = true;
         setUser(newUserInfo);
+        setLoggedInUser(newUserInfo);
         console.log('sing is user info',res.user);
       })
       .catch(error => {
