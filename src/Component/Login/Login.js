@@ -32,6 +32,7 @@ function Login() {
   .then(res =>{
     setUser(res)
     setLoggedInUser(res);
+    history.replace(from);
   })
  }
 
@@ -40,6 +41,7 @@ function Login() {
    .then(res =>{
     setUser(res)
     setLoggedInUser(res);
+    history.replace(from);
    })
  }
 
