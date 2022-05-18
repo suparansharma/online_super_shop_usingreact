@@ -181,7 +181,8 @@ export const handleGoogleSignIn =()=>{
         isSignedIn:true,
         name:displayName,
         email:email,
-        photo:photoURL
+        photo:photoURL,
+        success:true
       };
       return signedInUser;
       
@@ -203,11 +204,9 @@ export const handleGoogleSignIn =()=>{
       .then((result) => {
         // The signed-in user info.
         const user = result.user;
+        user.success=true;
         return user;
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        const credential = FacebookAuthProvider.credentialFromResult(result);
-        const accessToken = credential.accessToken;
-        console.log(user);
+       
     
         // ...
       })
@@ -252,67 +251,63 @@ export const handleGoogleSignIn =()=>{
         });
       }
     
-// export const createUserWithEmailAndPassword = () =>{
-//     console.log(user.email,user.password,"subbmit");
-//     const auth = getAuth();
-//     createUserWithEmailAndPassword(auth,user.email, user.password)
-// .then(res => {
-//   const user = res.user;
-//   console.log(res);
-//   const newUserInfo ={...user};
-//   newUserInfo.error = '';
-//   newUserInfo.success = true;
-//   setUser(newUserInfo);
-//   updateUserName(user.name);
-// })
-// .catch(error => {
-//   // const errorCode = error.code;
-//   // const errorMessage = error.message;
-//   // console.log(errorCode,errorMessage);
-//   const newUserInfo ={...user};
-//   newUserInfo.error = error.message;
-//   newUserInfo.success = false;
-//   setUser(newUserInfo);
-//   // ..
-// });
-// }
+export const createUserWithEmailAndPassword = (name,email,password) =>{
+    
+    const auth = getAuth();
+    return createUserWithEmailAndPassword(email,password)
+.then(res => {
+    const newUserInfo =res.user;
+    newUserInfo.error = '';
+    newUserInfo.success = true;
+  updateUserName(name);
+  return newUserInfo;
+ 
+})
+.catch(error => {
+  // const errorCode = error.code;
+  // const errorMessage = error.message;
+  // console.log(errorCode,errorMessage);
+  const newUserInfo ={};
+  newUserInfo.error = error.message;
+  newUserInfo.success = false;
+  return newUserInfo;
+
+  // ..
+});
+}
 
 
-// export const signInWithEmailAndPassword = () =>{
-//     signInWithEmailAndPassword(auth, user.email, user.password)
-//     .then(res => {
-//       const user = res.user;
-//       console.log(res);
-//       const newUserInfo ={...user};
-//       newUserInfo.error = '';
-//       newUserInfo.success = true;
-//       setUser(newUserInfo);
-//       setLoggedInUser(newUserInfo);
-//       history.replace(from);
-//       console.log('sing is user info',res.user);
-//     })
-//     .catch(error => {
-//       // const errorCode = error.code;
-//       // const errorMessage = error.message;
-//       // console.log(errorCode,errorMessage);
-//       const newUserInfo ={...user};
-//       newUserInfo.error = error.message;
-//       newUserInfo.success = false;
-//       setUser(newUserInfo);
+export const signInWithEmailAndPassword = (email,password) =>{
+   return signInWithEmailAndPassword( email, password)
+    .then(res => {
+  
+      const newUserInfo =res.user;
+      newUserInfo.error = '';
+      newUserInfo.success = true;
+     return newUserInfo;
+    })
+    .catch(error => {
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      // console.log(errorCode,errorMessage);
+      const newUserInfo ={};
+      newUserInfo.error = error.message;
+      newUserInfo.success = false;
+       return newUserInfo;
       
-//     });
-// }
+    });
+}
 
 
 
-// const updateUserName =name =>{
-//     const auth = getAuth();
-//     updateProfile(auth.currentUser, {
-//     displayName: name
-//     }).then(res => {
-//       console.log("update user name successfully")
-//     }).catch((error) => {
-//       console.log(error)
-//     });
-//   }
+const updateUserName =name =>{
+    const auth = getAuth();
+    updateProfile(auth.currentUser, {
+    displayName: name
+    }).then(res => {
+      console.log("update user name successfully")
+    }).catch((error) => {
+      console.log(error)
+    });
+  }
   

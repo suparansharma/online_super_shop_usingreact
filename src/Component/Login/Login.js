@@ -398,7 +398,7 @@ import { UserContext } from './../../App';
 import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { handleFbSignIn, handleGoogleSignIn, handleSignOut, initializeLoginFramework } from './loginManager';
+import { createUserWithEmailAndPassword, handleFbSignIn, handleGoogleSignIn, handleSignOut, initializeLoginFramework, signInWithEmailAndPassword } from './loginManager';
 
 
 
@@ -477,11 +477,21 @@ function Login() {
   const handleSubmit =(e)=>{
     
     if(newUser && user.email && user.password){
-
+      createUserWithEmailAndPassword(user.name,user.email,user.password)
+      .then(res =>{
+        setUser(res);
+    setLoggedInUser(res);
+    history.replace(from);
+      })
     }
 
     if(!newUser && user.email && user.password){
-
+      signInWithEmailAndPassword(user.email,user.password)
+      .then(res =>{
+        setUser(res);
+    setLoggedInUser(res);
+    history.replace(from);
+      })
     }
     e.preventDefault();
   }
