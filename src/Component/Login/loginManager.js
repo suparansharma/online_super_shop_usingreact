@@ -172,9 +172,9 @@ export const initializeLoginFramework = () =>{
 
 export const handleGoogleSignIn =()=>{
     const googleProvider = new GoogleAuthProvider();
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-   return signInWithPopup(auth, googleProvider)
+    // const app = initializeApp(firebaseConfig);
+    // const auth = getAuth(app);
+   return signInWithPopup( googleProvider)
     .then(res => {
       const {displayName,email,photoURL}=res.user;
       const signedInUser ={
@@ -198,9 +198,9 @@ export const handleGoogleSignIn =()=>{
 
     export const handleFbSignIn =() =>{
         const fbProvider = new FacebookAuthProvider();
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        return signInWithPopup(auth, fbProvider)
+        // const app = initializeApp(firebaseConfig);
+        // const auth = getAuth(app);
+        return signInWithPopup(fbProvider)
       .then((result) => {
         // The signed-in user info.
         const user = result.user;
@@ -251,63 +251,63 @@ export const handleGoogleSignIn =()=>{
         });
       }
     
-export const createUserWithEmailAndPassword = (name,email,password) =>{
+// export const createUserWithEmailAndPassword = (name,email,password) =>{
     
-    const auth = getAuth();
-    return createUserWithEmailAndPassword(email,password)
-.then(res => {
-    const newUserInfo =res.user;
-    newUserInfo.error = '';
-    newUserInfo.success = true;
-  updateUserName(name);
-  return newUserInfo;
+//     const auth = getAuth();
+//     return createUserWithEmailAndPassword(email,password)
+// .then(res => {
+//     const newUserInfo =res.user;
+//     newUserInfo.error = '';
+//     newUserInfo.success = true;
+//   updateUserName(name);
+//   return newUserInfo;
  
-})
-.catch(error => {
-  // const errorCode = error.code;
-  // const errorMessage = error.message;
-  // console.log(errorCode,errorMessage);
-  const newUserInfo ={};
-  newUserInfo.error = error.message;
-  newUserInfo.success = false;
-  return newUserInfo;
+// })
+// .catch(error => {
+//   // const errorCode = error.code;
+//   // const errorMessage = error.message;
+//   // console.log(errorCode,errorMessage);
+//   const newUserInfo ={};
+//   newUserInfo.error = error.message;
+//   newUserInfo.success = false;
+//   return newUserInfo;
 
-  // ..
-});
-}
+//   // ..
+// });
+// }
 
 
-export const signInWithEmailAndPassword = (email,password) =>{
-   return signInWithEmailAndPassword( email, password)
-    .then(res => {
+// export const signInWithEmailAndPassword = (email,password) =>{
+//    return signInWithEmailAndPassword( email, password)
+//     .then(res => {
   
-      const newUserInfo =res.user;
-      newUserInfo.error = '';
-      newUserInfo.success = true;
-     return newUserInfo;
-    })
-    .catch(error => {
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
-      // console.log(errorCode,errorMessage);
-      const newUserInfo ={};
-      newUserInfo.error = error.message;
-      newUserInfo.success = false;
-       return newUserInfo;
+//       const newUserInfo =res.user;
+//       newUserInfo.error = '';
+//       newUserInfo.success = true;
+//      return newUserInfo;
+//     })
+//     .catch(error => {
+//       // const errorCode = error.code;
+//       // const errorMessage = error.message;
+//       // console.log(errorCode,errorMessage);
+//       const newUserInfo ={};
+//       newUserInfo.error = error.message;
+//       newUserInfo.success = false;
+//        return newUserInfo;
       
-    });
-}
+//     });
+// }
 
 
 
-const updateUserName =name =>{
-    const auth = getAuth();
-    updateProfile(auth.currentUser, {
-    displayName: name
-    }).then(res => {
-      console.log("update user name successfully")
-    }).catch((error) => {
-      console.log(error)
-    });
-  }
+// const updateUserName =name =>{
+//     const auth = getAuth();
+//     updateProfile(auth.currentUser, {
+//     displayName: name
+//     }).then(res => {
+//       console.log("update user name successfully")
+//     }).catch((error) => {
+//       console.log(error)
+//     });
+//   }
   
