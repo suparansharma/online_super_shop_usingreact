@@ -316,6 +316,7 @@ function Login() {
         setUser(newUserInfo);
         setLoggedInUser(newUserInfo);
         history.replace(from);
+        setLoggedInUser(newUserInfo);
         console.log('sing is user info',res.user);
       })
       .catch(error => {
